@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TemplateEngineDemo</title>
+</head>
+
+<body>
+<div id="container"></div>
+<script src="/virtual/TemplateEngine.js"></script>
+<script type="container" id="TemplateEngine">
+  <div>
+    <ol>
+      {{#list}}
+        <li>
+          {{fruit}}的价格是{{price}},种类有：
+          <ol>
+            {{#type}}
+              <li>{{.}}</li>
+            {{/type}}
+          </ol>
+        </li>
+      {{/list}}
+    </ol>
+  </div>
+</script>
+<script>
+  let data = {
+    list: [
+      {'fruit': '苹果', 'price': 12.0, type: ['红富士', '青苹果', '国光', '蛇果']},
+      {'fruit': '橘子', 'price': 13.0, type: ['蜜橘', '沙糖橘', '红橘', '丑橘']},
+      {'fruit': '香蕉', 'price': 14.0, type: ['米蕉', '芝麻蕉', '李林蕉', '北蕉']},
+      {'fruit': '西瓜', 'price': 15.0, type: ['小天使', '京秀', '8421', '黑金刚']}
+    ]
+  }
+  let renderStr = TemplateEngine.render(document.getElementById('TemplateEngine').textContent, data);
+  console.log(renderStr)
+  document.getElementById('container').innerHTML = renderStr
+</script>
+</body>
+
+</html>
